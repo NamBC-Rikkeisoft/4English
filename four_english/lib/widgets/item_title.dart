@@ -1,7 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:four_english/models/content_model.dart';
+import 'package:four_english/routers/routers.dart';
+import 'package:four_english/views/file_view.dart';
+import 'package:get/get.dart';
 
 class ItemTitle extends StatelessWidget {
   const ItemTitle({
@@ -14,13 +15,18 @@ class ItemTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    nextViewFile(String file, String title) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => FileView(file: file, title: title,)));
+      // Get.toNamed(RouteNames.FILE_VIEW);
+    }
     // ignore: unnecessary_new, unused_local_variable
     List<GestureDetector> widgets = contents.map((element) => 
-      new GestureDetector(onTap: (){
-          print("Container clicked");
-        },
+      // ignore: unnecessary_new
+      new GestureDetector(
+        onTap: () => nextViewFile("grammar.html", element.name!),
+        // ignore: unnecessary_new
         child: new Container(
-                padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             margin: const EdgeInsets.only(left: 10.0, right:10.0, bottom: 8.0),
             width: MediaQuery.of(context).size.width * 0.8,
             decoration: BoxDecoration(                    
@@ -28,12 +34,12 @@ class ItemTitle extends StatelessWidget {
               borderRadius: new BorderRadius.all(const Radius.circular(20.0)),
               border: Border.all(color: const Color.fromRGBO(191, 191, 191, 1))
             ),
-            child: Text(element.name!, style: const TextStyle(fontWeight: FontWeight.w500)),
+            child: Text(element.name!, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 15, color: Colors.black)),
       ))
 
     ).toList();
 
-    return ExpansionTile(
+    return ExpansionTile (
       // ignore: avoid_unnecessary_containers
       title: Container(
         // ignore: sort_child_properties_last
@@ -51,4 +57,6 @@ class ItemTitle extends StatelessWidget {
       backgroundColor: Colors.white,
     );
   }
+  
+ 
 }

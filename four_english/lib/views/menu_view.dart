@@ -2,36 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:four_english/models/title_model.dart';
-import 'package:four_english/routers/pages.dart';
-import 'package:four_english/routers/routers.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:overlay_support/overlay_support.dart';
+import 'package:four_english/widgets/item_title.dart';
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+class MenuView extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        // appBar: AppBar(title: const Text(_title, style: TextStyle(color: Colors.black)), backgroundColor: Colors.white,),
-        resizeToAvoidBottomInset: false,
-        body: const MyStatefulWidget(),
-      ),
-    );
-  }
+  State<StatefulWidget> createState() => _MenuViewState();
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({super.key});
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _MenuViewState extends State<MenuView> {
   var titles = [
     {
       "title": "1. Danh từ",
@@ -296,7 +274,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ]
     }
   ];
-
+  static const String _title = 'Ngữ pháp';  
   late List<TitleModel> titleObjects;
   onClick(String file) {
 
@@ -315,38 +293,29 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   void initState() {
     super.initState();
     _fetchData();
-  }
+  } 
 
   @override
   Widget build(BuildContext context) {
-    // return Column(
+    return 
+    Scaffold(
+      appBar: AppBar(
+          title: Text(_title , style: TextStyle(color: Colors.black)), backgroundColor: Colors.white,
+      ),
+      body: Column(
+        children: titleObjects.isEmpty? 
+          <Widget>[
+            const Text("Menu null")
+          ]
+        :
+        // ignore: prefer_const_literals_to_create_immutables
+        <Widget>[
+          ...titleObjects.map((element) => ItemTitle(title: element.title!, contents: element.contents!)).toList()
+        ]
+      )
+    );
 
-    //   children: titleObjects.isEmpty? 
-    //     <Widget>[
-    //       const Text("Menu null")
-    //     ]
-    //   :
-    //   // ignore: prefer_const_literals_to_create_immutables
-    //   <Widget>[
-    //     ...titleObjects.map((element) => ItemTitle(title: element.title!, contents: element.contents!)).toList()
-    //   ]
-    // );
-
-     return OverlaySupport.global(
-        child: GetMaterialApp(
-          title: 'Flutter Demo',
-          // theme: defaultTheme,
-          debugShowCheckedModeBanner: false,
-          initialRoute: RouteNames.GRAMMAR_MENU,
-          // routes: {
-          //   for (RouteModel e in CommonPage.pages) e.name: (context) => e.page
-          // },
-          // translations: LocalizationService(),
-          locale: const Locale('en'),
-          getPages: Pages.pages(),
-          color: Colors.white,
-          // initialBinding: AppBinding(),
-        ),
-      );
+    
   }
+
 }

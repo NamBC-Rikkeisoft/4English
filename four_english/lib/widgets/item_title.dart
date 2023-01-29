@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:four_english/models/content_model.dart';
-import 'package:four_english/routers/routers.dart';
 import 'package:four_english/views/file_view.dart';
-import 'package:get/get.dart';
 
 class ItemTitle extends StatelessWidget {
   const ItemTitle({
@@ -42,6 +40,12 @@ class ItemTitle extends StatelessWidget {
     return ExpansionTile (
       // ignore: avoid_unnecessary_containers
       title: Container(
+        margin: const EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(15.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.blueAccent),
+          borderRadius: BorderRadius.circular(20)
+        ),
         // ignore: sort_child_properties_last
         child: Text(
               title,
@@ -56,7 +60,32 @@ class ItemTitle extends StatelessWidget {
       children: widgets,
       backgroundColor: Colors.white,
     );
+
+    // return Card(
+    //   elevation: 0,
+    //   shape: RoundedRectangleBorder(
+    //     side: const BorderSide(color: Colors.black, width: 2.0),
+    //     borderRadius: BorderRadius.circular(8),
+    //   ),
+    //   clipBehavior: Clip.antiAlias,
+    //   margin: EdgeInsets.zero,
+    //   child: ExpansionTile (
+    //     // ignore: avoid_unnecessary_containers
+    //     title: Container(
+    //       // ignore: sort_child_properties_last
+    //       child: Text(
+    //             title,
+    //             // ignore: prefer_const_constructors
+    //             style: TextStyle(
+    //             color: Colors.black,
+    //             fontWeight: FontWeight.bold
+    //           ),
+    //       ),
+    //     ),
+    //     // ignore: sort_child_properties_last
+    //     children: widgets,
+    //     backgroundColor: Colors.white,
+    //   )
+    // );
   }
-  
- 
 }

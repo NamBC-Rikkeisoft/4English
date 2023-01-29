@@ -1,15 +1,19 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:four_english/models/title_model.dart';
 import 'package:four_english/widgets/item_title.dart';
 
 class MenuView extends StatefulWidget {
+  const MenuView({super.key});
+
   @override
   State<StatefulWidget> createState() => _MenuViewState();
 }
 
 class _MenuViewState extends State<MenuView> {
+  var language = 1;
   var titles = [
     {
       "title": "1. Danh từ",
@@ -276,23 +280,58 @@ class _MenuViewState extends State<MenuView> {
   ];
   static const String _title = 'Ngữ pháp';  
   late List<TitleModel> titleObjects;
-  onClick(String file) {
 
-  }
-
-  _fetchData() {
+  _fetchData() async {
     titleObjects = [];
     List<dynamic> listTitleJson = json.decode(json.encode(titles)); 
     for (var element in listTitleJson) {
       TitleModel titleModel = TitleModel.fromJson(element);
       titleObjects.add(titleModel);
     }
+
+    // final String response = await rootBundle.loadString('assets/jsons/grammar.json');
+    // final data = await json.decode(response);
+    // var grammar = [];
+    // if (language == 1) {
+    //   grammar = data[0];
+    // } else if(language == 2) {
+    //    grammar = data[1];
+    // }
+
+    // for (var element in grammar) {
+    //     TitleModel titleModel = TitleModel.fromJson(element);
+    //     titleObjects.add(titleModel);
+    // }
   }
 
   @override
   void initState() {
     super.initState();
+    titleObjects = [];
     _fetchData();
+
+    // ignore: unnecessary_new
+    // new Future<String>.delayed(
+    //   // ignore: prefer_const_constructors
+    //   Duration(seconds: 2), 
+    //     () async => await rootBundle.loadString('assets/jsons/grammar.json'),
+    // ).then((String value) async {
+    //   final data = await json.decode(value);
+    //   var grammar = [];
+    //   List<TitleModel> listGrammarObjects = [];
+    //   if (language == 1) {
+    //     grammar = data[0];
+    //   } else if(language == 2) {
+    //     grammar = data[1];
+    //   }
+    //   for (var element in grammar) {
+    //     TitleModel titleModel = TitleModel.fromJson(element);
+    //     listGrammarObjects.add(titleModel);
+    //   }
+    //   setState(() {
+    //     titleObjects = listGrammarObjects;
+    //   });
+    // }); 
   } 
 
   @override
@@ -300,22 +339,22 @@ class _MenuViewState extends State<MenuView> {
     return 
     Scaffold(
       appBar: AppBar(
-          title: Text(_title , style: TextStyle(color: Colors.black)), backgroundColor: Colors.white,
+        centerTitle: true,
+        title: const Text(_title , style: TextStyle(color: Colors.black)), backgroundColor: Colors.white,
       ),
-      body: Column(
+      body: ListView(
+        padding: const EdgeInsets.all(8),
         children: titleObjects.isEmpty? 
+            <Widget>[
+              const Text("Loading...")
+            ]
+          :
+          // ignore: prefer_const_literals_to_create_immutables
           <Widget>[
-            const Text("Menu null")
+            ...titleObjects.map((element) => ItemTitle(title: element.title!, contents: element.contents!)).toList()
           ]
-        :
-        // ignore: prefer_const_literals_to_create_immutables
-        <Widget>[
-          ...titleObjects.map((element) => ItemTitle(title: element.title!, contents: element.contents!)).toList()
-        ]
+        
       )
     );
-
-    
   }
-
 }

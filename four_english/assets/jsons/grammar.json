@@ -1,38 +1,5 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
-import 'package:four_english/models/title_model.dart';
-import 'package:four_english/routers/pages.dart';
-import 'package:four_english/routers/routers.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:overlay_support/overlay_support.dart';
-
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        // appBar: AppBar(title: const Text(_title, style: TextStyle(color: Colors.black)), backgroundColor: Colors.white,),
-        resizeToAvoidBottomInset: false,
-        body: MyStatefulWidget(),
-      ),
-    );
-  }
-}
-
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({super.key});
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  var titles = [
+[
+  [
     {
       "title": "1. Danh từ",
       "content": [
@@ -109,7 +76,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           {
             "name": "Vị trí, thứ tự của Tính Từ",
             "file": ""
-          },
+          }
       ]
     },
     {
@@ -126,7 +93,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           {
             "name": "Phân loại Trạng Từ",
             "file": ""
-          },
+          }
       ]
     },
     {
@@ -225,7 +192,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           {
             "name": "Rút gọn các loại mệnh đề",
             "file": ""
-          },
+          }
       ]
     },
     {
@@ -246,7 +213,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           {
             "name": "Thì hiện tại hoàn thành tiếp diễn (Present Perfect Coutinuous)",
             "file": ""
-          },
+          }
       ]
     },
     {
@@ -267,7 +234,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           {
             "name": "Thì quá khứ hoàn thành tiếp diễn (Past Perfect Continuous)",
             "file": ""
-          },
+          }
       ]
     },
     {
@@ -292,61 +259,173 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           {
             "name": "Thì tương lai hoàn thành tiếp diễn (Future Perfect Continuous)",
             "file": ""
-          },
+          }
       ]
     }
-  ];
-  
-  late List<TitleModel> titleObjects;
-  onClick(String file) {
-
-  }
-
-  _fetchData() {
-    titleObjects = [];
-    List<dynamic> listTitleJson = json.decode(json.encode(titles)); 
-    for (var element in listTitleJson) {
-      TitleModel titleModel = TitleModel.fromJson(element);
-      titleObjects.add(titleModel);
+  ],
+  [
+    {
+      "title": "1. Noun",
+      "content": [
+          {
+            "name": "Countable and uncountable noun",
+            "file": ""
+          },
+          {
+            "name": "Reflexive Pronouns",
+            "file": ""
+          },
+          {
+            "name": "Prossessive adjective and pronouns",
+            "file": ""
+          },
+          {
+            "name": "Article",
+            "file": ""
+          },
+          {
+            "name": "Quantifier: some and any, much and many,...",
+            "file": ""
+          }
+      ]
+    },
+    {
+      "title": "2. Verb",
+      "content": [
+        {
+            "name": "Modal verbs",
+            "file": ""
+          },
+          {
+            "name": "Irregular verb",
+            "file": ""
+          }
+      ]
+    },
+    {
+      "title": "3. Adjective",
+      "content": [
+          {
+            "name": "Comparative and Superlative Adjectives",
+            "file": ""
+          }
+      ]
+    },
+    {
+      "title": "4. Preposition",
+      "content": [
+          {
+            "name": "Preposition of Time and Place",
+            "file": ""
+          }
+      ]
+    },
+    {
+      "title": "5. Simple Sentences",
+      "content": [
+          {
+            "name": "WH- questions",
+            "file": ""
+          },
+          {
+            "name": "Questions tags",
+            "file": ""
+          },
+          {
+            "name": "Passive voice",
+            "file": ""
+          }
+      ]
+    },
+    {
+      "title": "6. Complex Sentences & Compound Sentences",
+      "content": [
+          {
+            "name": "Conditional Sentences",
+            "file": ""
+          },
+          {
+            "name": "Relative clause",
+            "file": ""
+          }
+      ]
+    },
+    {
+      "title": "7. Common English Sentence Structures",
+      "content": [
+          {
+            "name": "find it/ something + adj + to do something",
+            "file": ""
+          }
+      ]
+    },
+    {
+      "title": "8. Present Tense",
+      "content": [
+          {
+            "name": "Singple Present Tense",
+            "file": ""
+          },
+          {
+            "name": "Present continuous tense",
+            "file": ""
+          },
+          {
+            "name": "Present Perfect Tense",
+            "file": ""
+          },
+          {
+            "name": "Present Perfect Coutinuous Tense",
+            "file": ""
+          }
+      ]
+    },
+    {
+      "title": "9. Past Tense",
+      "content": [
+          {
+            "name": "Past Simple Tense",
+            "file": ""
+          },
+          {
+            "name": "Past Continuous Tense",
+            "file": ""
+          },
+          {
+            "name": "Past Perfect Tense",
+            "file": ""
+          },
+          {
+            "name": "Past Perfect Continuous Tense",
+            "file": ""
+          }
+      ]
+    },
+    {
+      "title": "10. Future Tense",
+      "content": [
+          {
+            "name": "Future Simple Tense",
+            "file": ""
+          },
+          {
+            "name": "Future Continuous Tense",
+            "file": ""
+          },
+          {
+            "name": "Future Continuous Tense",
+            "file": ""
+          },
+          {
+            "name": "Future Perfect Tense",
+            "file": ""
+          },
+          {
+            "name": "Future Perfect Continuous Tense",
+            "file": ""
+          }
+      ]
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchData();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // return Column(
-
-    //   children: titleObjects.isEmpty? 
-    //     <Widget>[
-    //       const Text("Menu null")
-    //     ]
-    //   :
-    //   // ignore: prefer_const_literals_to_create_immutables
-    //   <Widget>[
-    //     ...titleObjects.map((element) => ItemTitle(title: element.title!, contents: element.contents!)).toList()
-    //   ]
-    // );
-
-     return OverlaySupport.global(
-        child: GetMaterialApp(
-          title: 'Flutter Demo',
-          // theme: defaultTheme,
-          debugShowCheckedModeBanner: false,
-          initialRoute: RouteNames.GRAMMAR_MENU,
-          // routes: {
-          //   for (RouteModel e in CommonPage.pages) e.name: (context) => e.page
-          // },
-          // translations: LocalizationService(),
-          locale: const Locale('en'),
-          getPages: Pages.pages(),
-          color: Colors.white,
-          // initialBinding: AppBinding(),
-        ),
-      );
-  }
-}
+  ]
+]
+  

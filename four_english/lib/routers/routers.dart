@@ -1,4 +1,6 @@
 class RouteNames {
+  // ignore: constant_identifier_names
   static const FILE_VIEW = "/file_view";
-  static const GRAMMAR_MENU = "/gammar_menu";
+  // ignore: constant_identifier_names
+  static const GRAMMAR_MENU = "/grammar_menu";
 }

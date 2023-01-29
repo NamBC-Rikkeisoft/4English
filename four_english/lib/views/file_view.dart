@@ -1,12 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+// import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class FileView extends StatefulWidget {
-  const FileView({required this.file, required this.title});
+  const FileView({super.key, required this.file, required this.title});
   final String file;
   final String title;
   @override
@@ -15,10 +13,11 @@ class FileView extends StatefulWidget {
 }
 
 class _FileViewState extends State<FileView> {
-  late WebViewController _controller;
+  // late WebViewController _controller;
   // ignore: unused_field
   late InAppWebViewController _webViewController;
   _fetchData() async {
+    // ignore: unused_local_variable
     String fileText = await rootBundle.loadString('assets/files/grammar.html');
     // _controller.loadUrl( Uri.dataFromString(
     //     fileText,
@@ -35,36 +34,30 @@ class _FileViewState extends State<FileView> {
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   appBar: AppBar(title: Text('Help')),
-    //   body: WebViewWidget(
-    //     initialUrl: 'about:blank',
-    //     onWebViewCreated: (WebViewController webViewController) {
-    //       _controller = webViewController;
-    //       _fetchData();
-    //     },
-    //   ),
-    // );
     return  Scaffold(
         appBar: AppBar(
-          title: Text(widget.title , style: TextStyle(color: Colors.black)), backgroundColor: Colors.white,
+          centerTitle: true,
+          leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
+        ), 
+          title: Text(widget.title , style: const TextStyle(color: Colors.black)), backgroundColor: Colors.white,
         ),
-        body: Container(
-            child: Column(children: <Widget>[
-              Expanded(
-                child:InAppWebView(
-                    initialFile: "assets/files/grammar.html",
-                    // initialOptions: InAppWebViewGroupOptions(
-                    //     crossPlatform: InAppWebViewOptions(
-                    //       debuggingEnabled: true,
-                    //     )
-                    // ),
-                    onWebViewCreated: (InAppWebViewController controller) {
-                      _webViewController = controller;
-                    },
-                ),
-              ),
-            ])),
+        body: Column(children: <Widget>[
+          Expanded(
+            child:InAppWebView(
+                initialFile: widget.file,
+                // initialOptions: InAppWebViewGroupOptions(
+                //     crossPlatform: InAppWebViewOptions(
+                //       debuggingEnabled: true,
+                //     )
+                // ),
+                onWebViewCreated: (InAppWebViewController controller) {
+                  _webViewController = controller;
+                },
+            ),
+          ),
+        ]),
       );
   }
 }
